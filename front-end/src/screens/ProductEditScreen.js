@@ -68,7 +68,7 @@ function ProductEditScreen({ match, history }) {
     );
   };
 
-  /* const uploadFileHandler = async (e) => {
+  const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
 
@@ -96,7 +96,7 @@ function ProductEditScreen({ match, history }) {
       setUploading(false);
     }
   };
-*/
+
   return (
     <div>
       <Link to="/admin/productlist">Go Back</Link>
@@ -145,11 +145,7 @@ function ProductEditScreen({ match, history }) {
                 id="image-file"
                 label="Choose File"
                 custom
-                onChange={
-                  {
-                    /*uploadFileHandler*/
-                  }
-                }
+                onChange={uploadFileHandler}
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
