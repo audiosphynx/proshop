@@ -8,9 +8,9 @@ import Message from "../components/Message";
 import {
   listProducts,
   deleteProduct,
-  //createProduct,
+  createProduct,
 } from "../actions/productActions";
-//import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 function ProductListScreen({ history, match }) {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function ProductListScreen({ history, match }) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-  /*
+
   const productCreate = useSelector((state) => state.productCreate);
   const {
     loading: loadingCreate,
@@ -32,31 +32,30 @@ function ProductListScreen({ history, match }) {
     success: successCreate,
     product: createdProduct,
   } = productCreate;
-	*/
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   // let keyword = history.location.search;
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({ type: PRODUCT_CREATE_RESET });
 
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-
-      //if (successCreate) {
-      // history.push(`/admin/product/${createdProduct._id}/edit`);
-    } else {
-      //dispatch(listProducts(keyword));
+    if (!userInfo.isAdmin) {
+      // dispatch(listProducts());
       history.push("/login");
+    }
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts(/*keyword*/));
     }
   }, [
     dispatch,
     history,
     userInfo,
     successDelete,
-    // successCreate,
-    // createdProduct,
+    successCreate,
+    createdProduct,
     // keyword,
   ]);
 
@@ -67,7 +66,7 @@ function ProductListScreen({ history, match }) {
   };
 
   const createProductHandler = () => {
-    // dispatch(createProduct());
+    dispatch(createProduct());
   };
 
   return (
@@ -87,9 +86,8 @@ function ProductListScreen({ history, match }) {
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
 
-      {/*      {loadingCreate && <Loader />}
+      {loadingCreate && <Loader />}
       {errorCreate && <Message variant="danger">{errorCreate}</Message>}
-*/}
       {loading ? (
         <Loader />
       ) : error ? (
