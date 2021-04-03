@@ -7,7 +7,7 @@ import Message from "../components/Message";
 //import Paginate from "../components/Paginate";
 import {
   listProducts,
-  //deleteProduct,
+  deleteProduct,
   //createProduct,
 } from "../actions/productActions";
 //import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
@@ -18,13 +18,13 @@ function ProductListScreen({ history, match }) {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products /*pages, page */ } = productList;
 
-  //const productDelete = useSelector((state) => state.productDelete);
-  /*const {
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-
+  /*
   const productCreate = useSelector((state) => state.productCreate);
   const {
     loading: loadingCreate,
@@ -54,7 +54,7 @@ function ProductListScreen({ history, match }) {
     dispatch,
     history,
     userInfo,
-    // successDelete,
+    successDelete,
     // successCreate,
     // createdProduct,
     // keyword,
@@ -62,7 +62,7 @@ function ProductListScreen({ history, match }) {
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      //dispatch(deleteProduct(id));
+      dispatch(deleteProduct(id));
     }
   };
 
@@ -83,11 +83,11 @@ function ProductListScreen({ history, match }) {
           </Button>
         </Col>
       </Row>
-      {/*
+
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
 
-      {loadingCreate && <Loader />}
+      {/*      {loadingCreate && <Loader />}
       {errorCreate && <Message variant="danger">{errorCreate}</Message>}
 */}
       {loading ? (
