@@ -51,8 +51,6 @@ REST_FRAMEWORK = {
     )
 }
 
-from datetime import timedelta
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -120,8 +118,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'proshop',
+        'USER': 'audiosphynx',
+        'PASSWORD': 'pow12345',
+        'HOST': 'proshop-identifier.c33fmqqvxknk.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
