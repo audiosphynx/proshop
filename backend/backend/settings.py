@@ -26,7 +26,7 @@ SECRET_KEY = 'ikf1xm$9(3jm$e^*0s)ykp9$p@3pzr(epl0oba08@sy%88b=dt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'corsheaders',
+    'storages',
     
     'base.apps.BaseConfig',
 ]
@@ -152,7 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
@@ -176,3 +177,12 @@ MEDIA_ROOT = 'static/images'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAXSL6CKZJ7SI3SCPL'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'proshop-demo-bucket'
+
+# BugFix Need to specify region
+AWS_S3_REGION_NAME = 'eu-central-1' 
